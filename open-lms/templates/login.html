@@ -1,0 +1,64 @@
+{% extends "layout.html" %} <!-- We breiden het standaard layout uit. Hierin zit ook het `block content` in. -->
+
+{% block content %} <!-- Zie `block content` in `layout.html-->
+    <h1></h1>Login page
+    <div class="content-section"> <!-- The `content-section`, is defined in main.css -->
+        <form method="POST" action=""> <!-- `action="", means that it will POST this form to the same route -->
+            {{ form.hidden_tag() }} <!-- the `.hidden_tag()`, we HAVE to do this to use the CSRF-token -->
+            <fieldset class="form-group"><!-- The `class="form-group" is Bootstrap -->
+                <legend class="border-bottom mb-4">Log In</legend>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }} <!-- This will print out the `label` field that we defined. The class="form-control-label", is some Bootstrap that we add to this label. -->
+                 
+                    <!-- Error validatie -->
+                    {% if form.email.errors %} <!-- Only if the validation contains errors. -->
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback"> <!-- Kennelijk is `invalid-feedback`, Bootstrap. -->
+                            {% for error in form.email.errors %} <!-- De `errors`, lijkt default for de wtf_forms. -->
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        <div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                    <!-- /Error validatie -->
+
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }} <!-- This will print out the `label` field that we defined. The class="form-control-label", is some Bootstrap that we add to this label. -->
+    
+                    <!-- Error validatie -->
+                    {% if form.password.errors %} <!-- Only if the validation contains errors. -->
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback"> <!-- Kennelijk is `invalid-feedback`, Bootstrap. -->
+                            {% for error in form.username.errors %} <!-- De `errors`, lijkt default for de wtf_forms. -->
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                    <!-- /Error validatie -->
+
+                </div>
+                <div class="form-check">
+                    {{ form.remember(class="form-check-input") }} <!-- Dit was the `remember` BooleanField in de `forms.py`-file. -->
+                    {{ form.remember.label(class="form-check-label") }} 
+                </div>
+              
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+                <small class="text muted ml-2">
+                    <a href="#">Forgot Password?</a> <!-- If you want a dummy ULR, just use a pound/hashtag sign: #. -->
+                </small>
+            </fieldset>
+
+        </form>
+    </div>
+    <div class="border-top pt-3"><!-- If you already have an account you can log straigth away. -->
+        <small class="text-muted">
+            Need an Account? <a class="ml-2" href="{{ url_for('register') }}">Sign up now.</a> <!-- The `login` does NOT reflect the route `/login`, but the function `login()` that is defined below. -->
+        </small>
+    </div>
+{% endblock content %} 

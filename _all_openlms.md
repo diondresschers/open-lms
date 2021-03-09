@@ -89,7 +89,51 @@ So now you can run:
 
 `python3 open-lms.py`
 
+# The most popular forms is WTF
+
+So install:
+
+`python3 -m pip install flask-wtf`
+
+Then create a `requirements.txt` file:
+
+```
+(venv-open-lms) open-lms $ python3 -m pip freeze > requirements.txt
+(venv-open-lms) open-lms $ cat requirements.txt 
+click==7.1.2
+Flask==1.1.2
+Flask-WTF==0.14.3
+itsdangerous==1.1.0
+Jinja2==2.11.3
+MarkupSafe==1.1.1
+pkg-resources==0.0.0
+Werkzeug==1.0.1
+WTForms==2.3.3
+```
+
+# Use for CSR-protection:
 
 
+Create a random number:
+
+```
+(venv-open-lms) open-lms $ python3
+Python 3.7.3 (default, Jul 25 2020, 13:03:44) 
+[GCC 8.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import secrets
+>>> secrets.token_hex(16)
+'7e002078a3859c9c0628a4f3700e935a'
+```
+
+# Gebruik je WTF formlulieren en doen je aan email-validatie:
+
+In je code:
+
+`from wtforms.validators import Email`
+
+Installeer email_validator`
+
+`python3 -m pip install email_validator`
 
 
